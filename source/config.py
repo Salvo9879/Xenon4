@@ -21,36 +21,43 @@ class SettingsManager():
     NOTE: The manager auto creating the settings file may block several certain features; this can be modified in the servers dashboard. COMING SOON! """
 
     def __init__(self) -> None:
+        # Creates the `ConfigParser` instance.
         self.cp = configparser.ConfigParser()
 
+        # Checks if the `/instance` directory exists, if not it is created.
         if not directory_exists(Paths.INSTANCE_ABS_PATH):
             create_directory(Paths.INSTANCE_ABS_PATH)
 
+        # Checks if the `/instance/system.ini` file exists, it calls the format function.
         if not file_exists(Paths.SETTINGS_ABS_PATH):
             self.format()
-            return
+        
+        # Calls the `deploy_values()` function.
         self.deploy_values()
 
     def format(self) -> None:
         """ Creates & formats the settings config file to it's default values. """
 
+        # Creates the `/instance/system.ini` file.
         create_file(Paths.SETTINGS_ABS_PATH)
 
+        # Creates the `SERVER` section in the `system.ini` file.
         section_name = 'SERVER'
         self.cp.add_section(section_name)
 
+        # Sets the host, port & debug mode.
         self.cp.set(section_name, 'host', str(DEFAULT_HOST))
         self.cp.set(section_name, 'port', str(DEFAULT_PORT))
         self.cp.set(section_name, 'debug', str(DEFAULT_DEBUG))
 
+        # Writes to the `/instance/system.ini` file all the config parser data.
         with open(Paths.SETTINGS_ABS_PATH, 'w') as f:
             self.cp.write(f)
-
-        self.deploy_values()
 
     def deploy_values(self) -> None:
         """ Deploys the values stored in the settings config file. These values can now be accessed as properties. """
 
+        # Deploys the information stored under the `SERVER` section as instance properties.
         section_name = 'SERVER'
         self.cp.read(Paths.SETTINGS_ABS_PATH)
         self.server_host = self.cp.get(section_name, 'host')
