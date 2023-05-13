@@ -20,6 +20,10 @@ class Paths():
     INSTANCE_ABS_PATH = os.path.join(ABS_PATH, 'instance') # The absolute path to the programs instance directory.
     SETTINGS_ABS_PATH = os.path.join(INSTANCE_ABS_PATH, 'system.ini')
 
+    # Templating & static
+    TEMPLATES_ABS_PATH = os.path.join(ABS_PATH, 'templates')
+    STATIC_ABS_PATH = os.path.join(ABS_PATH, 'static')
+
 def join_paths(*paths: str) -> str:
         """ Returns an absolute path joined to a give path. 
 
