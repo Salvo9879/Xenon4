@@ -13,6 +13,7 @@ from sqlalchemy import create_engine, Column
 from sqlalchemy.types import String, Integer, DateTime, Date
 from sqlalchemy.orm import sessionmaker, declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 # Variables
 base = declarative_base()
@@ -116,7 +117,7 @@ class ProfileTypes(base):
     description = Column('description', String)
 
 
-class Users(base):
+class Users(base, UserMixin):
     """ The users database table is used to store information about the users. Each person in the household should have a profile. These profiles are stored in this table. The main use of these 
     profiles is so that different users have access to different data stored (mainly in apps). For example you don't want your exercise information from a tracker visible to the whole household - so
     all the data is stored in databases & protected under a authentication policy. Another reason to create profiles is to limit what different profile types can access on the Xenon server. Like 
