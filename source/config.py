@@ -61,5 +61,5 @@ class SettingsManager():
         section_name = 'SERVER'
         self.cp.read(Paths.SETTINGS_ABS_PATH)
         self.server_host = self.cp.get(section_name, 'host')
-        self.server_port = self.cp.get(section_name, 'port')
-        self.server_debug = self.cp.get(section_name, 'debug')
+        self.server_port = self.cp.getint(section_name, 'port')
+        self.server_debug = self.cp.getboolean(section_name, 'debug')

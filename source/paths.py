@@ -24,6 +24,10 @@ class Paths():
     TEMPLATES_ABS_PATH = os.path.join(ABS_PATH, 'templates')
     STATIC_ABS_PATH = os.path.join(ABS_PATH, 'static')
 
+    # Databases
+    _DB_URL = 'sqlite:///' 
+    DB_ABS_PATH = _DB_URL + os.path.join(INSTANCE_ABS_PATH, 'xenon.db')
+
 def join_paths(*paths: str) -> str:
         """ Returns an absolute path joined to a give path. 
 

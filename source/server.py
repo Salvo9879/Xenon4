@@ -3,6 +3,7 @@ routing, databases, authentication, context processing etc. """
 
 # Import internal packages
 from source.config import SettingsManager
+from source.databases import DatabasesManager
 from source.paths import Paths
 from routes import base_r
 
@@ -12,6 +13,7 @@ from flask import Flask
 # Variables
 server = Flask(__name__)
 settings_manager = SettingsManager()
+databases_manager = DatabasesManager()
 
 # Server configuration
 server.template_folder = Paths.TEMPLATES_ABS_PATH
